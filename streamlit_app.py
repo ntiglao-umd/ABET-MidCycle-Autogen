@@ -121,7 +121,7 @@ def format_from_cell(cell, out_wb, format_cache):
             "bottom": "bottom",
         }.items():
             side = getattr(border, side_name)
-            bstyle = border_style(side.style)
+            #bstyle = border_style(side.style)
             border_style = _border_style(side.style if side is not None else None)
             if bstyle:
                 props[xlsx_name] = bstyle
