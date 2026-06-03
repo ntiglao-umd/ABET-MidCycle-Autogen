@@ -122,7 +122,7 @@ def format_from_cell(cell, out_wb, format_cache):
         }.items():
             side = getattr(border, side_name)
             #bstyle = border_style(side.style)
-            border_style = _border_style(side.style if side is not None else None)
+            bstyle = _border_style(side.style if side is not None else None)
             if bstyle:
                 props[xlsx_name] = bstyle
                 color = rgb_from_openpyxl_color(side.color)
