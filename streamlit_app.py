@@ -122,6 +122,7 @@ def format_from_cell(cell, out_wb, format_cache):
         }.items():
             side = getattr(border, side_name)
             bstyle = border_style(side.style)
+            border_style = _border_style(side.style if side is not None else None)
             if bstyle:
                 props[xlsx_name] = bstyle
                 color = rgb_from_openpyxl_color(side.color)
@@ -132,6 +133,25 @@ def format_from_cell(cell, out_wb, format_cache):
     format_cache[key] = fmt
     return fmt
 
+def _border_style(style):
+    if not style:
+        return None
+
+    return {
+        "thin": 1,
+        "medium": 2,
+        "thick": 5,
+        "dashed": 3,
+        "dotted": 4,
+        "double": 6,
+        "hair": 7,
+        "mediumDashed": 8,
+        "dashDot": 9,
+        "mediumDashDot": 10,
+        "dashDotDot": 11,
+        "mediumDashDotDot": 12,
+        "slantDashDot": 13,
+    }.get(style, 1)
 
 def write_cell(ws, row0, col0, cell, fmt):
     """Write a single cell while preserving formulas and date/time values."""
